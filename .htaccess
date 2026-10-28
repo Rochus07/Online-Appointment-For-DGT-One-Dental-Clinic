@@ -1,0 +1,40 @@
+ErrorDocument 404 /dgt_dental_clinic/404.php
+
+AddType application/manifest+json .webmanifest
+
+# Clean addresses (2026-10-11): pages are reached without ".php".
+#  - /home serves index.php; an old /index.php link redirects to /home.
+#  - Any other GET for page.php redirects to /page (query string kept).
+#    POSTs and /api/ calls are never redirected (a redirect would drop the
+#    POST body); they just work either way.
+#  - /page is served by page.php when that file exists.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{THE_REQUEST} \s(\S*/)index\.php[\s?]
+    RewriteRule ^index\.php$ %1home [R=301,L]
+
+    # The receptionist's home page is labelled "Appointments", so it lives at
+    # /modules/receptionist/appointments (the file is still dashboard.php).
+    RewriteCond %{REQUEST_METHOD} =GET
+    RewriteCond %{THE_REQUEST} \s(\S*/modules/receptionist/)dashboard(\.php)?[\s?]
+    RewriteRule ^modules/receptionist/dashboard(\.php)?$ %1appointments [R=301,L,NE]
+    RewriteRule ^modules/receptionist/appointments$ modules/receptionist/dashboard.php [L]
+
+    # Same for the dentist's "My Schedule" page (file: dentist/dashboard.php).
+    RewriteCond %{REQUEST_METHOD} =GET
+    RewriteCond %{THE_REQUEST} \s(\S*/modules/dentist/)dashboard(\.php)?[\s?]
+    RewriteRule ^modules/dentist/dashboard(\.php)?$ %1myschedule [R=301,L,NE]
+    RewriteRule ^modules/dentist/myschedule$ modules/dentist/dashboard.php [L]
+
+    RewriteCond %{REQUEST_METHOD} =GET
+    RewriteCond %{THE_REQUEST} !/api/
+    RewriteCond %{THE_REQUEST} ^GET\s([^?\s]+)\.php[\s?]
+    RewriteRule \.php$ %1 [R=301,L,NE]
+
+    RewriteRule ^home$ index.php [L]
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.+)$ $1.php [L]
+</IfModule>

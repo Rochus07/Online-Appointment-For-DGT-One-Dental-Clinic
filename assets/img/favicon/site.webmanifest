@@ -1,0 +1,12 @@
+{
+    "name": "DGT One Dental Center - Bulacan",
+    "short_name": "DGT One Dental",
+    "icons": [
+        { "src": "/dgt_dental_clinic/assets/img/favicon/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+        { "src": "/dgt_dental_clinic/assets/img/favicon/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+    ],
+    "theme_color": "#102f51",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "start_url": "/dgt_dental_clinic/"
+}

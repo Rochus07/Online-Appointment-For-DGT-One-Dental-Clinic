@@ -1,0 +1,24 @@
+# Real SMTP credentials (Gmail App Password) — never commit. See config/mail.example.php
+# for the safe, credential-free template this file was copied from.
+config/mail.php
+
+# Real Abstract API / EmailVerify.io / Mailboxlayer keys for the
+# mailbox-existence check — never commit. See config/email_verify.example.php
+# for the safe, credential-free template this file was copied from.
+config/email_verify.php
+
+# Runtime logs (may contain patient e-mails / message bodies from the mail.log fallback).
+logs/*.log
+
+# Live database credentials (root copy used for the Hostinger deploy) - never commit.
+/db.php
+
+# Patient uploads: payment receipts and profile photos are personal data.
+uploads/receipts/*
+uploads/avatars/*
+
+# Local scratch / tooling files.
+/nul
+/cj_*.txt
+/rs*.png
+.claude/worktrees/

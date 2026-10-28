@@ -1,0 +1,17 @@
+# DGT One Dental Center - Bulacan
+# Public pages may be indexed. App screens need a login (crawlers are sent to the sign-in page), so they are not blocked here; APIs, receipts and patient files are.
+User-agent: *
+Disallow: /modules/shared/receipt
+Disallow: /api/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /logs/
+Disallow: /migrations/
+Disallow: /uploads/receipts/
+Disallow: /uploads/avatars/
+Disallow: /verify
+Disallow: /reset_password
+Disallow: /change_password
+Disallow: /logout
+
+Sitemap: https://dgtonebulacan.thefinalcapstone.com/sitemap.xml
